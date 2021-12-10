@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    button,
+
+    #run {
+        font-family: lato;
+        display: block;
+        margin: 50px auto;
+        color: dodgerblue;
+        background-color: white;
+        font-weight: 600;
+        outline: none;
+        border: none;
+    }
+
+    button {
+        padding: 10px 20px;
+        cursor: pointer;
+        outline: none;
+        font-size: 42px;
+        box-shadow: 10px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 40px;
+    }
+
+    .go {
+        transition: 1s ease-in-out;
+    }
+
+    #btn {
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        z-index: -10;
+    }
+
+
+    #run {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 32px;
+        padding: 10px 15px;
+        border-radius: 25px;
+    }
+
+    #cpy {
+        margin-top: 5.5%;
+        margin-right: 25%;
+    }
+</style>
+
+<body>
+    <button type="button" onclick="change()"> Click Me!</button>
+    <div id="btn"></div>
+    <input type="text" value="" id="run">
+    <button type="button" id="cpy" onclick="showw()">Copy</button>
+</body>
+<script>
+    let color;
+    function change() {
+        let clr = document.getElementById('btn');
+        clr.classList.toggle('go');
+        let min = 0;
+        let max = 255;
+        const num = [];
+        for (i = 0; i < 3; i++) {
+            let n = (min, max) => {
+                return Math.floor(Math.random() * (max - min) + min);
+            };
+            num[i] = n(0, 255);
+            console.log(num[i]);
+        }
+        let str = `rgb(${num[0]}, ${num[1]}, ${num[2]})`;
+        color = str;
+        clr.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`;
+        document.getElementById('run').value = str;
+    }
+    function showw() {
+        var copyText = document.getElementById("run");
+        copyText.select();
+        copyText.setSelectionRange(0, 0);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copied the text: " + copyText.value);
+    }
+</script>
+
+</html>
